@@ -26,21 +26,25 @@ struct AddNewNote: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 Text("add_title_note_here".localize())
+                    .fontWeight(.bold)
                 TextField("enter_note_here".localize(), text: $title)
             }
             .padding(.horizontal, 10)
             
             VStack(alignment: .leading) {
                 Text("add_content_note_here".localize())
+                    .fontWeight(.bold)
                 TextField("enter_note_content_here".localize(), text: $content)
             }
             .padding(.horizontal, 10)
             
             ColorPicker("select_note_color".localize(), selection: $color)
                 .padding(.horizontal, 10)
+                .fontWeight(.bold)
                 .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
             Toggle("favorite_note".localize(), isOn: $isLike)
                 .padding(.horizontal, 10)
+                .fontWeight(.bold)
             Spacer()
             Button("add_note".localize()) {
                 let note = Note(context: moc)
