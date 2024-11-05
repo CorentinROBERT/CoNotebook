@@ -14,7 +14,10 @@ struct AddNewNote: View {
     @State var content : String = ""
     @State var createdAt : Date = Date()
     @State var updatedAt : Date = Date()
+    @State private var color : Color = .white
+    @State private var components: Color.Resolved?
     
+    @Environment(\.self) var environment
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var moc
     
@@ -23,11 +26,18 @@ struct AddNewNote: View {
             VStack(alignment: .leading) {
                 Text("add_title_note_here".localize())
                 TextField("enter_note_here".localize(), text: $title)
-            }.padding()
+            }
+            .padding(.horizontal, 10)
+            
             VStack(alignment: .leading) {
                 Text("add_content_note_here".localize())
                 TextField("enter_note_content_here".localize(), text: $content)
-            }.padding()
+            }
+            .padding(.horizontal, 10)
+            
+            ColorPicker("select_note_color".localize(), selection: $color)
+                .padding(.horizontal, 10)
+                .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
             Spacer()
             Button("add_note".localize()) {
                 let note = Note(context: moc)
@@ -36,7 +46,11 @@ struct AddNewNote: View {
                 note.content = content
                 note.createdAt = Date()
                 note.updateAt = Date()
-                note.isRead = false
+                note.colorR = components?.red ?? 0
+                note.colorG = components?.green ?? 0
+                note.colorB = components?.blue ?? 0
+                note.colorA = components?.opacity ?? 1
+                note.isLike = false
                 do {
                     try moc.save()
                     dismiss()
@@ -45,10 +59,11 @@ struct AddNewNote: View {
                 }
             }
             .padding(10)
-            .background(Color.blue)
+            .background((title.isEmpty || content.isEmpty) ? .gray : Color.blue)
             .foregroundStyle(.white)
             .cornerRadius(5)
             .navigationTitle("new_note".localize())
+            .disabled(title.isEmpty || content.isEmpty)
         }
     }
 }

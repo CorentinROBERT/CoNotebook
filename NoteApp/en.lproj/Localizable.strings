@@ -14,7 +14,7 @@
 "sure_delete_this_note" = "Are you sure you want to delete this note?";
 "this_note" = "this note";
 "add_new_note" = "Add new note";
-"note_app" = "Note App";
+"note_app" = "Notes";
 "add_title_note_here" = "Add title note here";
 "enter_note_here" = "Enter note title here";
 "add_content_note_here" = "Add content note here";
@@ -23,3 +23,4 @@
 "new_note" = "New note";
 "enter_title" = "Enter a title";
 "note_will_delete_permanently" = "Note will be permanently deleted";
+"select_note_color" = "Select note background color";

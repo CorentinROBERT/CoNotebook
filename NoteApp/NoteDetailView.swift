@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct NoteDetailView: View {
     
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
+    @Environment(\.self) var environment
+    
+    @State private var color : Color = .white
+    @State private var components: Color.Resolved?
     
     var note : Note
     @State var isAlertPresented = false
@@ -27,16 +32,38 @@ struct NoteDetailView: View {
     var body: some View {
         VStack {
             if(isModificationMode){
-                TextField("enter_title".localize(), text: $editTitle)
-                    .font(.title)
-                    .padding(.leading , 10)
+                HStack{
+                    TextField("enter_title".localize(), text: $editTitle)
+                        .font(.title)
+                    ColorPicker("",selection: $color)
+                        .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
+                        .labelsHidden()
+                }
+                .padding(.horizontal , 10)
                 TextEditor(text: $editText)
                     .padding(.leading , 10)
+                    .textEditorStyle(.plain)
             }
             else{
+                HStack{
+                    Text(note.title!)
+                        .font(.title)
+                    Circle()
+                        .stroke(Color.black, lineWidth: 1)
+                        .fill(Color(
+                            red: Double(note.colorR),
+                            green: Double(note.colorG),
+                            blue: Double(note.colorB),
+                            opacity: Double(note.colorA)
+                        ))
+                        .frame(width: 30, height: 30)
+                }
+                .frame(maxWidth: .infinity,alignment: .leading)
+                .padding(.horizontal , 10)
                 Text(note.content!)
                     .frame(maxWidth: .infinity,alignment: .leading)
-                    .padding(.leading , 10)
+                    .padding(.leading , 15)
+                    .padding(.top , 2)
             }
             
             Spacer()
@@ -44,6 +71,10 @@ struct NoteDetailView: View {
                 Button("validate".localize()){
                     note.title = editTitle
                     note.content = editText
+                    note.colorR = components?.red ?? 0
+                    note.colorG = components?.green ?? 0
+                    note.colorB = components?.blue ?? 0
+                    note.colorA = components?.opacity ?? 1
                     note.updateAt = Date()
                     do {
                         try moc.save()
@@ -75,7 +106,14 @@ struct NoteDetailView: View {
             }
             
         }
-        .navigationTitle(isModificationMode ? "" : note.title!)
+        .onAppear {
+                   color = Color(
+                       red: Double(note.colorR),
+                       green: Double(note.colorG),
+                       blue: Double(note.colorB),
+                       opacity: Double(note.colorA)
+                   )
+               }
         .toolbar {
             if(!isModificationMode){
                 Button(action: modifyNote) {
@@ -93,4 +131,17 @@ struct NoteDetailView: View {
     func modifyNote() {
         self.isModificationMode.toggle()
     }
+}
+
+#Preview {
+    let dataController = DataController()
+    let context = dataController.container.viewContext
+
+    let exampleNote = Note(context: context)
+    exampleNote.title = "Exemple de note"
+    exampleNote.content = "Ceci est le contenu de la note pour la prévisualisation."
+    exampleNote.updateAt = Date()
+
+    return NoteDetailView(note: exampleNote)
+        .environment(\.managedObjectContext, context)
 }
