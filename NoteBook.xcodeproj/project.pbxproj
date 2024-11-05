@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F89EF9E22CBE4D4200716181 /* NoteApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F89EF9E02CBE4D4200716181 /* NoteApp.xcdatamodeld */; };
+		F89EF9E22CBE4D4200716181 /* NoteBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F89EF9E02CBE4D4200716181 /* NoteBook.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F89EF9CF2CBE4D1000716181 /* NoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F89EF9E12CBE4D4200716181 /* NoteApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteApp.xcdatamodel; sourceTree = "<group>"; };
+		F89EF9CF2CBE4D1000716181 /* NoteBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F89EF9E12CBE4D4200716181 /* NoteBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteBook.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F89EF9D12CBE4D1000716181 /* NoteApp */ = {
+		F89EF9D12CBE4D1000716181 /* NoteBook */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NoteApp;
+			path = NoteBook;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -37,8 +37,8 @@
 		F89EF9C62CBE4D1000716181 = {
 			isa = PBXGroup;
 			children = (
-				F89EF9E02CBE4D4200716181 /* NoteApp.xcdatamodeld */,
-				F89EF9D12CBE4D1000716181 /* NoteApp */,
+				F89EF9E02CBE4D4200716181 /* NoteBook.xcdatamodeld */,
+				F89EF9D12CBE4D1000716181 /* NoteBook */,
 				F89EF9D02CBE4D1000716181 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,7 +46,7 @@
 		F89EF9D02CBE4D1000716181 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F89EF9CF2CBE4D1000716181 /* NoteApp.app */,
+				F89EF9CF2CBE4D1000716181 /* NoteBook.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,9 +54,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F89EF9CE2CBE4D1000716181 /* NoteApp */ = {
+		F89EF9CE2CBE4D1000716181 /* NoteBook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "NoteApp" */;
+			buildConfigurationList = F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "NoteBook" */;
 			buildPhases = (
 				F89EF9CB2CBE4D1000716181 /* Sources */,
 				F89EF9CC2CBE4D1000716181 /* Frameworks */,
@@ -67,13 +67,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F89EF9D12CBE4D1000716181 /* NoteApp */,
+				F89EF9D12CBE4D1000716181 /* NoteBook */,
 			);
-			name = NoteApp;
+			name = NoteBook;
 			packageProductDependencies = (
 			);
 			productName = NoteApp;
-			productReference = F89EF9CF2CBE4D1000716181 /* NoteApp.app */;
+			productReference = F89EF9CF2CBE4D1000716181 /* NoteBook.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -91,7 +91,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "NoteApp" */;
+			buildConfigurationList = F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "NoteBook" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -106,7 +106,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F89EF9CE2CBE4D1000716181 /* NoteApp */,
+				F89EF9CE2CBE4D1000716181 /* NoteBook */,
 			);
 		};
 /* End PBXProject section */
@@ -126,7 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F89EF9E22CBE4D4200716181 /* NoteApp.xcdatamodeld in Sources */,
+				F89EF9E22CBE4D4200716181 /* NoteBook.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +259,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NoteApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"NoteBook/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -287,7 +287,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NoteApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"NoteBook/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -311,7 +311,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "NoteApp" */ = {
+		F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "NoteBook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F89EF9DB2CBE4D1000716181 /* Debug */,
@@ -320,7 +320,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "NoteApp" */ = {
+		F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "NoteBook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F89EF9DE2CBE4D1000716181 /* Debug */,
@@ -332,13 +332,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F89EF9E02CBE4D4200716181 /* NoteApp.xcdatamodeld */ = {
+		F89EF9E02CBE4D4200716181 /* NoteBook.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F89EF9E12CBE4D4200716181 /* NoteApp.xcdatamodel */,
+				F89EF9E12CBE4D4200716181 /* NoteBook.xcdatamodel */,
 			);
-			currentVersion = F89EF9E12CBE4D4200716181 /* NoteApp.xcdatamodel */;
-			path = NoteApp.xcdatamodeld;
+			currentVersion = F89EF9E12CBE4D4200716181 /* NoteBook.xcdatamodel */;
+			path = NoteBook.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

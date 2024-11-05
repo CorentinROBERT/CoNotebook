@@ -22,6 +22,7 @@ struct NoteDetailView: View {
     @State var isModificationMode = false
     @State private var editTitle: String = ""
     @State private var editText: String = ""
+    @State private var isLike: Bool = false
     
     init (note: Note) {
         self.editTitle = note.title ?? ""
@@ -38,6 +39,17 @@ struct NoteDetailView: View {
                     ColorPicker("",selection: $color)
                         .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
                         .labelsHidden()
+                    Spacer()
+                    Button("", systemImage: isLike ? "heart.fill" : "heart",action: {
+                        isLike.toggle()
+                        do {
+                            note.isLike = isLike
+                            try moc.save()
+                        } catch {
+                            print("Error saving note: \(error.localizedDescription)")
+                        }
+                    })
+                    .foregroundStyle(.black)
                 }
                 .padding(.horizontal , 10)
                 TextEditor(text: $editText)
@@ -50,20 +62,29 @@ struct NoteDetailView: View {
                         .font(.title)
                     Circle()
                         .stroke(Color.black, lineWidth: 1)
-                        .fill(Color(
-                            red: Double(note.colorR),
-                            green: Double(note.colorG),
-                            blue: Double(note.colorB),
-                            opacity: Double(note.colorA)
-                        ))
+                        .fill(note.getColor())
                         .frame(width: 30, height: 30)
+                    Spacer()
+                    Button("", systemImage: isLike ? "heart.fill" : "heart",action: {
+                        isLike.toggle()
+                        do {
+                            note.isLike = isLike
+                            try moc.save()
+                        } catch {
+                            print("Error saving note: \(error.localizedDescription)")
+                        }
+                    })
+                    .foregroundStyle(.black)
                 }
                 .frame(maxWidth: .infinity,alignment: .leading)
                 .padding(.horizontal , 10)
-                Text(note.content!)
-                    .frame(maxWidth: .infinity,alignment: .leading)
-                    .padding(.leading , 15)
-                    .padding(.top , 2)
+                ScrollView{
+                    Text(note.content!)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .padding(.leading , 15)
+                        .padding(.top , 2)
+                }
+                
             }
             
             Spacer()
@@ -87,7 +108,7 @@ struct NoteDetailView: View {
             }
             else{
                 Button(action: {
-                   isAlertPresented.toggle()
+                    isAlertPresented.toggle()
                 }) {
                     Text("delete".localize())
                         .foregroundStyle(.red)
@@ -107,13 +128,9 @@ struct NoteDetailView: View {
             
         }
         .onAppear {
-                   color = Color(
-                       red: Double(note.colorR),
-                       green: Double(note.colorG),
-                       blue: Double(note.colorB),
-                       opacity: Double(note.colorA)
-                   )
-               }
+            color = note.getColor()
+            self.isLike = note.isLike
+        }
         .toolbar {
             if(!isModificationMode){
                 Button(action: modifyNote) {
@@ -136,12 +153,12 @@ struct NoteDetailView: View {
 #Preview {
     let dataController = DataController()
     let context = dataController.container.viewContext
-
+    
     let exampleNote = Note(context: context)
     exampleNote.title = "Exemple de note"
     exampleNote.content = "Ceci est le contenu de la note pour la prévisualisation."
     exampleNote.updateAt = Date()
-
+    
     return NoteDetailView(note: exampleNote)
         .environment(\.managedObjectContext, context)
 }

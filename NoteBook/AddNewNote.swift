@@ -16,6 +16,7 @@ struct AddNewNote: View {
     @State var updatedAt : Date = Date()
     @State private var color : Color = .white
     @State private var components: Color.Resolved?
+    @State private var isLike: Bool = false
     
     @Environment(\.self) var environment
     @Environment(\.dismiss) var dismiss
@@ -38,6 +39,8 @@ struct AddNewNote: View {
             ColorPicker("select_note_color".localize(), selection: $color)
                 .padding(.horizontal, 10)
                 .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
+            Toggle("favorite_note".localize(), isOn: $isLike)
+                .padding(.horizontal, 10)
             Spacer()
             Button("add_note".localize()) {
                 let note = Note(context: moc)
@@ -50,7 +53,7 @@ struct AddNewNote: View {
                 note.colorG = components?.green ?? 0
                 note.colorB = components?.blue ?? 0
                 note.colorA = components?.opacity ?? 1
-                note.isLike = false
+                note.isLike = isLike
                 do {
                     try moc.save()
                     dismiss()
