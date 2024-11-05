@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 class DataController: ObservableObject {
-    let container = NSPersistentContainer(name: "NoteApp")
+    let container = NSPersistentContainer(name: "NoteBook")
     
     init() {
         container.loadPersistentStores { description, error in

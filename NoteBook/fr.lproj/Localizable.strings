@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  NoteApp
-
-  Created by Corentin Robert on 16/10/2024.
-  
-*/
+/*
+ Localizable.strings
+ NoteApp
+ 
+ Created by Corentin Robert on 16/10/2024.
+ 
+ */
 "no_note_yet" = "Pas encore de notes";
 "delete_note" = "Supprimer note";
 "delete" = "Supprimer";
@@ -14,7 +14,7 @@
 "sure_delete_this_note" = "Êtes-vous sure de vouloir supprimer cette note ?";
 "this_note" = "cette note";
 "add_new_note" = "Ajouter une nouvelle note";
-"note_app" = "Note Application";
+"note_app" = "Notes";
 "add_title_note_here" = "Ajouter un titre de note";
 "enter_note_here" = "Entrer un titre de note ici";
 "add_content_note_here" = "Ajouter un contenue de note";
@@ -23,3 +23,15 @@
 "new_note" = "Nouvelle note";
 "enter_title" = "Entrer un titre";
 "note_will_delete_permanently" = "La note va être supprimer définitivement";
+"select_note_color" = "Select note background color";
+"select_sorting_note" = "Sort notes by";
+"none" = "None";
+"date" = "Date";
+"categories" = "Categories";
+"like" = "J'aime";
+"liked" = "Aimé";
+"unliked" = "Pas aimé";
+"favorites" = "Favoris";
+"not_favorites" = "Pas favoris";
+"all_notes" = "Toutes les notes";
+"favorite_note" = "Note favoris";

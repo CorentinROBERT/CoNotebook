@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct NoteAppApp: App {
+struct NoteBook: App {
     @StateObject private var dataController = DataController()
     var body: some Scene {
         WindowGroup {
