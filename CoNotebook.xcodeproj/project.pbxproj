@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F89EF9E22CBE4D4200716181 /* NoteBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F89EF9E02CBE4D4200716181 /* NoteBook.xcdatamodeld */; };
+		F89EF9E22CBE4D4200716181 /* CoNotebook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F89EF9E02CBE4D4200716181 /* CoNotebook.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F89EF9CF2CBE4D1000716181 /* NoteBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F89EF9E12CBE4D4200716181 /* NoteBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteBook.xcdatamodel; sourceTree = "<group>"; };
+		F89EF9CF2CBE4D1000716181 /* CoNotebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoNotebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F89EF9E12CBE4D4200716181 /* CoNotebook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoNotebook.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F89EF9D12CBE4D1000716181 /* NoteBook */ = {
+		F89EF9D12CBE4D1000716181 /* CoNotebook */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NoteBook;
+			path = CoNotebook;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -37,8 +37,8 @@
 		F89EF9C62CBE4D1000716181 = {
 			isa = PBXGroup;
 			children = (
-				F89EF9E02CBE4D4200716181 /* NoteBook.xcdatamodeld */,
-				F89EF9D12CBE4D1000716181 /* NoteBook */,
+				F89EF9E02CBE4D4200716181 /* CoNotebook.xcdatamodeld */,
+				F89EF9D12CBE4D1000716181 /* CoNotebook */,
 				F89EF9D02CBE4D1000716181 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,7 +46,7 @@
 		F89EF9D02CBE4D1000716181 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F89EF9CF2CBE4D1000716181 /* NoteBook.app */,
+				F89EF9CF2CBE4D1000716181 /* CoNotebook.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,9 +54,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F89EF9CE2CBE4D1000716181 /* NoteBook */ = {
+		F89EF9CE2CBE4D1000716181 /* CoNotebook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "NoteBook" */;
+			buildConfigurationList = F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "CoNotebook" */;
 			buildPhases = (
 				F89EF9CB2CBE4D1000716181 /* Sources */,
 				F89EF9CC2CBE4D1000716181 /* Frameworks */,
@@ -67,13 +67,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F89EF9D12CBE4D1000716181 /* NoteBook */,
+				F89EF9D12CBE4D1000716181 /* CoNotebook */,
 			);
-			name = NoteBook;
+			name = CoNotebook;
 			packageProductDependencies = (
 			);
 			productName = NoteApp;
-			productReference = F89EF9CF2CBE4D1000716181 /* NoteBook.app */;
+			productReference = F89EF9CF2CBE4D1000716181 /* CoNotebook.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -91,7 +91,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "NoteBook" */;
+			buildConfigurationList = F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "CoNotebook" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -106,7 +106,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F89EF9CE2CBE4D1000716181 /* NoteBook */,
+				F89EF9CE2CBE4D1000716181 /* CoNotebook */,
 			);
 		};
 /* End PBXProject section */
@@ -126,7 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F89EF9E22CBE4D4200716181 /* NoteBook.xcdatamodeld in Sources */,
+				F89EF9E22CBE4D4200716181 /* CoNotebook.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,20 +259,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NoteBook/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CoNotebook/Preview Content\"";
+				DEVELOPMENT_TEAM = 8UTV7J6Z6Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CoNotebook;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = test.NoteApp;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corentinrobert.notebook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -287,20 +289,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"NoteBook/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CoNotebook/Preview Content\"";
+				DEVELOPMENT_TEAM = 8UTV7J6Z6Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = CoNotebook;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = test.NoteApp;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.corentinrobert.notebook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -311,7 +315,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "NoteBook" */ = {
+		F89EF9CA2CBE4D1000716181 /* Build configuration list for PBXProject "CoNotebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F89EF9DB2CBE4D1000716181 /* Debug */,
@@ -320,7 +324,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "NoteBook" */ = {
+		F89EF9DD2CBE4D1000716181 /* Build configuration list for PBXNativeTarget "CoNotebook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F89EF9DE2CBE4D1000716181 /* Debug */,
@@ -332,13 +336,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F89EF9E02CBE4D4200716181 /* NoteBook.xcdatamodeld */ = {
+		F89EF9E02CBE4D4200716181 /* CoNotebook.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F89EF9E12CBE4D4200716181 /* NoteBook.xcdatamodel */,
+				F89EF9E12CBE4D4200716181 /* CoNotebook.xcdatamodel */,
 			);
-			currentVersion = F89EF9E12CBE4D4200716181 /* NoteBook.xcdatamodel */;
-			path = NoteBook.xcdatamodeld;
+			currentVersion = F89EF9E12CBE4D4200716181 /* CoNotebook.xcdatamodel */;
+			path = CoNotebook.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
