@@ -24,10 +24,11 @@ struct ContentView: View {
             let unlikedNotes = notes.filter { !$0.isLike }
             return ["favorites".localize(): likedNotes, "not_favorites".localize(): unlikedNotes]
         case "date":
-            // Regrouper par date sans heure
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
-            return Dictionary(grouping: notes, by: { dateFormatter.string(from: $0.updateAt ?? Date()) })
+            let sortedNotes = notes.sorted(by: { ($0.createdAt ?? Date()) > ($1.createdAt ?? Date()) })
+            return Dictionary(grouping: sortedNotes, by: { dateFormatter.string(from: $0.createdAt ?? Date()) })
+
         default:
             // Aucun regroupement
             return ["all_notes".localize(): Array(notes)]
@@ -67,7 +68,7 @@ struct ContentView: View {
                 }
             } else {
                 List {
-                    ForEach(groupedNotes.keys.sorted(), id: \.self) { key in
+                    ForEach(groupedNotes.keys.sorted(by: selectedSorting == "like" ? { $0 < $1 } : { $0 > $1 }), id: \.self) { key in
                         Section(header: Text(key)) {
                             ForEach(groupedNotes[key] ?? []) { note in
                                 NavigationLink(destination: NoteDetailView(note: note)) {
@@ -78,7 +79,9 @@ struct ContentView: View {
                                             Spacer()
                                             Button("", systemImage: note.isLike ? "heart.fill" : "heart",action: {
                                             }).onTapGesture {
-                                                note.isLike.toggle()
+                                                withAnimation {
+                                                    note.isLike.toggle()
+                                                }
                                                 do {
                                                     try moc.save()
                                                 } catch {
@@ -86,7 +89,7 @@ struct ContentView: View {
                                                     print("Error saving note: \(error.localizedDescription)")
                                                 }
                                             }
-                                            .foregroundStyle(.black)
+                                            .foregroundStyle(.red)
                                         }
                                         HStack {
                                             Text(note.content ?? "")
@@ -132,7 +135,7 @@ struct ContentView: View {
     }
     
     private func backgroundColor(for note: Note) -> Color {
-        note.getColor()
+        note.getColor().opacity(0.5)
     }
     
     private func showDeleteAlert(at offsets: IndexSet) {
