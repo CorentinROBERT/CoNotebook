@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F89EF9CE2CBE4D1000716181"
-               BuildableName = "NoteBook.app"
-               BlueprintName = "NoteBook"
-               ReferencedContainer = "container:NoteBook.xcodeproj">
+               BuildableName = "CoNotebook.app"
+               BlueprintName = "CoNotebook"
+               ReferencedContainer = "container:CoNotebook.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F89EF9CE2CBE4D1000716181"
-            BuildableName = "NoteBook.app"
-            BlueprintName = "NoteBook"
-            ReferencedContainer = "container:NoteBook.xcodeproj">
+            BuildableName = "CoNotebook.app"
+            BlueprintName = "CoNotebook"
+            ReferencedContainer = "container:CoNotebook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,9 +63,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F89EF9CE2CBE4D1000716181"
-            BuildableName = "NoteBook.app"
-            BlueprintName = "NoteBook"
-            ReferencedContainer = "container:NoteBook.xcodeproj">
+            BuildableName = "CoNotebook.app"
+            BlueprintName = "CoNotebook"
+            ReferencedContainer = "container:CoNotebook.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
