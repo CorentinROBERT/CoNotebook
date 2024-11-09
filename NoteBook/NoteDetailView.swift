@@ -36,12 +36,14 @@ struct NoteDetailView: View {
                 HStack{
                     TextField("enter_title".localize(), text: $editTitle)
                         .font(.title)
-                    ColorPicker("",selection: $color)
+                    ColorPicker("",selection: $color,supportsOpacity: false)
                         .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
                         .labelsHidden()
                     Spacer()
                     Button("", systemImage: isLike ? "heart.fill" : "heart",action: {
-                        isLike.toggle()
+                        withAnimation {
+                            isLike.toggle()
+                        }
                         do {
                             note.isLike = isLike
                             try moc.save()
@@ -49,7 +51,7 @@ struct NoteDetailView: View {
                             print("Error saving note: \(error.localizedDescription)")
                         }
                     })
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.red)
                 }
                 .padding(.horizontal , 10)
                 TextEditor(text: $editText)
@@ -66,7 +68,9 @@ struct NoteDetailView: View {
                         .frame(width: 30, height: 30)
                     Spacer()
                     Button("", systemImage: isLike ? "heart.fill" : "heart",action: {
-                        isLike.toggle()
+                        withAnimation{
+                            isLike.toggle()
+                        }
                         do {
                             note.isLike = isLike
                             try moc.save()
@@ -74,7 +78,7 @@ struct NoteDetailView: View {
                             print("Error saving note: \(error.localizedDescription)")
                         }
                     })
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.red)
                 }
                 .frame(maxWidth: .infinity,alignment: .leading)
                 .padding(.horizontal , 10)

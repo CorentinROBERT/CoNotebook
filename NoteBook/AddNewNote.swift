@@ -38,7 +38,7 @@ struct AddNewNote: View {
             }
             .padding(.horizontal, 10)
             
-            ColorPicker("select_note_color".localize(), selection: $color)
+            ColorPicker("select_note_color".localize(), selection: $color,supportsOpacity: false)
                 .padding(.horizontal, 10)
                 .fontWeight(.bold)
                 .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
