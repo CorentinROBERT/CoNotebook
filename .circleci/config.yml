@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     macos:
-      xcode: "13.2.1"
+      xcode: "16.1"
     environment:
       FL_OUTPUT_DIR: output
     steps:
