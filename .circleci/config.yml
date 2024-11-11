@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   build:
     macos:
@@ -7,9 +8,34 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator clean build
+          command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0' clean build
+      - run:
+          name: Run Tests
+          command: xcodebuild test -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0'
+
+  deploy_to_testflight:
+    macos:
+      xcode: "16.1"
+    steps:
+      - checkout
+      - run:
+          name: Build for TestFlight
+          command: xcodebuild -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphoneos -configuration AppStoreDistribution clean archive -archivePath ./build/CoNotebook.xcarchive
+      - run:
+          name: Export Archive
+          command: xcodebuild -exportArchive -archivePath ./build/CoNotebook.xcarchive -exportPath ./build -exportOptionsPlist ExportOptions.plist
+      - run:
+          name: Upload to TestFlight
+          command: xcrun altool --upload-app -f ./build/CoNotebook.ipa -t ios --apiKey "L33A5YWFMZ" --apiIssuer "62fb183c-c168-4dcb-bfde-a0463cf60b62" --verbose
+
 workflows:
   version: 2
-  build_and_test:
+  build_and_deploy:
     jobs:
       - build
+      - deploy_to_testflight:
+          requires:
+            - build
+          filters:
+            branches:
+              only: release
