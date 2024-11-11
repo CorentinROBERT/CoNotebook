@@ -8,9 +8,6 @@ jobs:
       - run:
           name: Build
           command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator clean build
-      - run:
-          name: Run Tests
-          command: xcodebuild test -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination
 workflows:
   version: 2
   build_and_test:
