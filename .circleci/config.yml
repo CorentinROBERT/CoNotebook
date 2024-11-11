@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run:
           name: Build for TestFlight
-          command: xcodebuild -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphoneos -configuration AppStoreDistribution clean archive -archivePath ./build/CoNotebook.xcarchive
+          command: xcodebuild -workspace CoNotebook.xcodeproj -scheme CoNotebook -sdk iphoneos -configuration AppStoreDistribution clean archive -archivePath ./build/CoNotebook.xcarchive
       - run:
           name: Export Archive
           command: xcodebuild -exportArchive -archivePath ./build/CoNotebook.xcarchive -exportPath ./build -exportOptionsPlist ExportOptions.plist
