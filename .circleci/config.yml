@@ -8,10 +8,10 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0' clean build
+          command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator clean build
       - run:
           name: Run Tests
-          command: xcodebuild test -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0'
+          command: xcodebuild test -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator
 
   deploy_to_testflight:
     macos:
