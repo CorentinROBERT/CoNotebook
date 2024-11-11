@@ -6,9 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Resolve Swift Packages
-          command: xcodebuild -resolvePackageDependencies -workspace CoNotebook.xcworkspace
-      - run:
           name: Build
           command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1' clean build
       - run:
