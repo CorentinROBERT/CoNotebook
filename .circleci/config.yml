@@ -10,11 +10,10 @@ jobs:
           command: xcodebuild -resolvePackageDependencies -workspace CoNotebook.xcworkspace
       - run:
           name: Build
-          command: xcodebuild -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1' clean build
+          command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1' clean build
       - run:
           name: Run Tests
-          command: xcodebuild test -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1'
-
+          command: xcodebuild test -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1'
 workflows:
   version: 2
   build_and_test:
