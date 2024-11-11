@@ -2,23 +2,38 @@ version: 2.1
 jobs:
   build:
     macos:
-      xcode: "16.1"
+      xcode: "16.1"  # Assurez-vous que cette version d'Xcode est bien supportée par CircleCI
     environment:
       FL_OUTPUT_DIR: output
     steps:
       - checkout
       - run:
-          name: Install Dependencies
+          name: Install Bundler and Dependencies
           command: |
             gem install bundler
-            bundle install
-            bundle exec pod install
+            if [ -f Gemfile ]; then
+              bundle install
+            fi
+            bundle exec pod install || pod install  # Exécute Cocoapods avec Bundle si dispo, sinon sans
+      
+      # Cache Cocoapods pour réduire les temps de build futurs
+      - save_cache:
+          paths:
+            - ~/.cocoapods
+            - Pods
+          key: v1-pods-{{ checksum "Podfile.lock" }}
+      
+      # Rebuild Cocoapods s'il n'est pas dans le cache
+      - restore_cache:
+          keys:
+            - v1-pods-{{ checksum "Podfile.lock" }}
+      
       - run:
           name: Build
-          command: xcodebuild -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.1' clean build
+          command: xcodebuild -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1' clean build
       - run:
           name: Run Tests
-          command: xcodebuild test -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.1'
+          command: xcodebuild test -workspace CoNotebook.xcworkspace -scheme CoNotebook -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1'
 workflows:
   version: 2
   build_and_test:
