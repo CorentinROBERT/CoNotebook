@@ -24,7 +24,7 @@
 "enter_title" = "Entrer un titre";
 "note_will_delete_permanently" = "La note va être supprimer définitivement";
 "select_note_color" = "Select note background color";
-"select_sorting_note" = "Sort notes by";
+"select_sorting_note" = "Trier par :";
 "none" = "None";
 "date" = "Date";
 "categories" = "Categories";
