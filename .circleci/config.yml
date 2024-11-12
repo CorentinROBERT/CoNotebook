@@ -16,14 +16,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build for TestFlight
-          command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphoneos -configuration AppStoreDistribution clean archive -archivePath ./build/CoNotebook.xcarchive
+  
       - run:
-          name: Export Archive
-          command: xcodebuild -exportArchive -archivePath ./build/CoNotebook.xcarchive -exportPath ./build -exportOptionsPlist ExportOptions.plist
-      - run:
-          name: Upload to TestFlight
-          command: xcrun altool --upload-app -f ./build/CoNotebook.ipa -t ios --apiKey APP_STORE_API_KEY --apiIssuer APP_STORE_API_ISSUER --verbose
+          name: Upload to testflight
+          command: fastlane beta
 
 workflows:
   version: 2
@@ -36,3 +32,4 @@ workflows:
           filters:
             branches:
               only: release
+
