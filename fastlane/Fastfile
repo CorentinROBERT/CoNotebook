@@ -18,10 +18,7 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    sigh(
-      app_identifier: "com.corentinrobert.notebook",
-      provisioning_name: "provisionning_profile_app_store_conotebook"
-    )
+    match(type: "appstore", app_identifier: "com.corentinrobert.notebook")
     increment_build_number(xcodeproj: "CoNotebook.xcodeproj")
     build_app(scheme: "CoNotebook")
     upload_to_testflight
