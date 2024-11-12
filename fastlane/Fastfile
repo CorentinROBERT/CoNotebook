@@ -1,6 +1,4 @@
 # fastlane/Fastfile
-apple_id "corentin.robert@outlook.com"
-app_identifier "com.corentinrobert.notebook"
 default_platform :ios
 
 platform :ios do
