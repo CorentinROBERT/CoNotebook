@@ -12,12 +12,17 @@ platform :ios do
     # the latest build already available on TestFlight, then
     # increase the build number by 1. If no build is available
     # for that version, then start at 1
-    increment_build_number(
-      build_number: latest_testflight_build_number(
-        initial_build_number: 1,
-        version: get_version_number(xcodeproj: "CoNotebook.xcodeproj")
-      ) + 1,
-    )
+    # Obtenez le dernier numéro de build sur TestFlight
+last_build_number = latest_testflight_build_number(
+  initial_build_number: 1,
+  version: get_version_number(xcodeproj: "CoNotebook.xcodeproj")
+)
+
+# Ajoutez 1 au dernier numéro de build
+increment_build_number(
+  build_number: last_build_number + 1
+)
+
     # Set up Distribution code signing and build the app
     match(type: "appstore")
     gym(scheme: "CoNotebook")
