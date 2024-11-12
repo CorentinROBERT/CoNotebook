@@ -16,8 +16,6 @@ jobs:
     steps:
       - checkout
       - run:
-  
-      - run:
           name: Upload to testflight
           command: fastlane beta
 
