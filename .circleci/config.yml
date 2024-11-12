@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run:
           name: Upload to testflight
-          command: fastlane beta
+          command: fastlane upload_testflight
 
 workflows:
   version: 2
