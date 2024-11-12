@@ -1,4 +1,6 @@
 # fastlane/Fastfile
+apple_id "corentin.robert@outlook.com"
+app_identifier "com.corentinrobert.notebook"
 default_platform :ios
 
 platform :ios do
@@ -8,21 +10,13 @@ platform :ios do
 
   desc "Upload to Testflight"
   lane :upload_testflight do
-    # Get the version number from the project and check against
-    # the latest build already available on TestFlight, then
-    # increase the build number by 1. If no build is available
-    # for that version, then start at 1
-    # Obtenez le dernier numéro de build sur TestFlight
-last_build_number = latest_testflight_build_number(
-  initial_build_number: 1,
-  version: get_version_number(xcodeproj: "CoNotebook.xcodeproj")
-)
 
-# Ajoutez 1 au dernier numéro de build
-increment_build_number(
-  build_number: last_build_number + 1
-)
-
+    increment_build_number(
+      build_number: latest_testflight_build_number(
+        initial_build_number: 1,
+        version: get_version_number(xcodeproj: "HelloWorld.xcodeproj")
+      ) + 1,
+    )
     # Set up Distribution code signing and build the app
     match(type: "appstore")
     gym(scheme: "CoNotebook")
