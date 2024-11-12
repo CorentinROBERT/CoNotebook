@@ -9,7 +9,6 @@ platform :ios do
   desc "Upload to Testflight"
   lane :upload_testflight do
 
-    xcode_select # Make sure to use the correct Xcode version
    match(
      type: "appstore",
      app_identifier: "com.corentinrobert.notebook",
