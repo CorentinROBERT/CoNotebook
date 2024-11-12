@@ -18,9 +18,9 @@ jobs:
       - run:
           name: Configure provisioning profile
           command: |
-            echo $MOBILEPROVISION_BASE64 | base64 --decode > provisioning_profile.mobileprovision
+            echo $MOBILEPROVISION_BASE64 | base64 --decode > provisionning_profile_app_store_conotebook.mobileprovision
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-            mv provisioning_profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+            mv provisionning_profile_app_store_conotebook.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
       - run:
           name: Upload to testflight
           command: fastlane beta
