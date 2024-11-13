@@ -19,7 +19,7 @@ platform :ios do
     )
 
     # Set up Distribution code signing and build the app
-    match(type: "appstore")
+    match(type: "appstore", app_identifier: "com.corentinrobert.CoNotebook", readonly: true)
     gym(scheme: "CoNotebook")
     # Upload the binary to TestFlight and automatically publish
     app_store_connect_api_key(
