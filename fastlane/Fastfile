@@ -11,6 +11,7 @@ platform :ios do
 
     version_number = get_version_number(xcodeproj: "CoNotebook.xcodeproj")
     latest_build_number = latest_testflight_build_number(
+      api_key: ENV["FASTLANE_PASSWORD"]
       version: version_number
     ) || 0
 
