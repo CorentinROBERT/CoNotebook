@@ -12,7 +12,7 @@ platform :ios do
     increment_build_number(
       build_number: app_store_build_number(
         initial_build_number: 1,
-        version: get_version_number(xcodeproj: "HelloCircle.xcodeproj"),
+        version: get_version_number(xcodeproj: "CoNotebook.xcodeproj"),
         live: false
       ) + 1,
     )
