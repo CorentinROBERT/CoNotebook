@@ -9,6 +9,8 @@ platform :ios do
   desc "Upload to Testflight"
   lane :upload_testflight do
 
+    app_identifier : "com.corentinrobert.notebook"
+
     increment_build_number(
       build_number: app_store_build_number(
         initial_build_number: 1,
@@ -18,7 +20,7 @@ platform :ios do
     )
 
     # Set up Distribution code signing and build the app
-    match(type: "appstore", app_identifier: "com.corentinrobert.CoNotebook", readonly: true)
+    match(type: "appstore", app_identifier: "com.corentinrobert.notebook", readonly: true)
     gym(scheme: "CoNotebook")
     # Upload the binary to TestFlight and automatically publish
     app_store_connect_api_key(
