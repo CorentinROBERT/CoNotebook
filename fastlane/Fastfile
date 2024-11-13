@@ -13,7 +13,7 @@ platform :ios do
     sh "echo $APP_STORE_CONNECT_API_KEY_ISSUER_ID"
     sh "echo $APP_STORE_CONNECT_API_KEY_KEY"
 
-    echo $FASTLANE_PASSWORD
+    sh "echo $FASTLANE_PASSWORD"
 
     version_number = get_version_number(xcodeproj: "CoNotebook.xcodeproj")
     latest_build_number = latest_testflight_build_number(
