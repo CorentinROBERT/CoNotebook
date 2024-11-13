@@ -25,7 +25,7 @@
 "note_will_delete_permanently" = "La note va être supprimer définitivement";
 "select_note_color" = "Select note background color";
 "select_sorting_note" = "Trier par :";
-"none" = "None";
+"none" = "Aucun";
 "date" = "Date";
 "categories" = "Categories";
 "like" = "J'aime";
