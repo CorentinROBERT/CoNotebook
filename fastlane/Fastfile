@@ -11,13 +11,8 @@ platform :ios do
 
     app_identifier = "com.corentinrobert.notebook"
 
-    increment_build_number(
-      build_number: app_store_build_number(
-        initial_build_number: 1,
-        version: get_version_number(xcodeproj: "CoNotebook.xcodeproj"),
-        live: false
-      ) + 1,
-    )
+    current_build_number = app_store_build_number(live: false)
+    increment_build_number(xcodeproj: "CoNotebook.xcodeproj", build_number: current_build_number + 1)
 
     # Set up Distribution code signing and build the app
     match(type: "appstore", app_identifier: "com.corentinrobert.notebook", readonly: true)
