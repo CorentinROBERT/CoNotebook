@@ -9,11 +9,13 @@ platform :ios do
   desc "Upload to Testflight"
   lane :upload_testflight do
 
+    version_number = get_version_number(xcodeproj: "CoNotebook.xcodeproj")
+    latest_build_number = latest_testflight_build_number(
+      version: version_number
+    ) || 0
+
     increment_build_number(
-      build_number: latest_testflight_build_number(
-        initial_build_number: 1,
-        version: get_version_number(xcodeproj: "CoNotebook.xcodeproj")
-      ) + 1
+      build_number: latest_build_number + 1
     )
 
     # Set up Distribution code signing and build the app
