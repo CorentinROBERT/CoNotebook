@@ -9,25 +9,23 @@ platform :ios do
   desc "Upload to Testflight"
   lane :upload_testflight do
 
-   match(
-     type: "appstore",
-     app_identifier: "com.corentinrobert.notebook",
-     git_url: "https://github.com/CorentinROBERT/match.git", # Update with your own Git repo
-   )
-
-  gym(
-   scheme: "CoNotebook", # Replace with your Xcode scheme
-   export_method: "app-store",
-   export_options: {
-     uploadBitcode: false,
-     uploadSymbols: true,
-   }
-  )
-
-  pilot(
-   distribute_external: false,
-   distribute_testers: true,
-   groups: "Internal Testers",
-  )
+    increment_build_number(
+      build_number: latest_testflight_build_number(
+        initial_build_number: 1,
+        version: get_version_number(xcodeproj: "CoNotebook.xcodeproj")
+      ) + 1
+    )
+    # Set up Distribution code signing and build the app
+    match(type: "appstore")
+    gym(scheme: "CoNotebook")
+    # Upload the binary to TestFlight and automatically publish
+    # to the configured beta testing group
+    app_store_connect_api_key
+    pilot(
+      distribute_external: true,
+      notify_external_testers: true,
+      groups: ["Beta"],
+      changelog: "This is another new build from CircleCI!"
+    )
   end
 end
