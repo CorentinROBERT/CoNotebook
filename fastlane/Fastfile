@@ -9,9 +9,9 @@ platform :ios do
   desc "Upload to Testflight"
   lane :upload_testflight do
 
-    echo $APP_STORE_CONNECT_API_KEY_KEY_ID
-    echo $APP_STORE_CONNECT_API_KEY_ISSUER_ID
-    echo $APP_STORE_CONNECT_API_KEY_KEY
+    echo($APP_STORE_CONNECT_API_KEY_KEY_ID)
+    echo($APP_STORE_CONNECT_API_KEY_ISSUER_ID)
+    echo($APP_STORE_CONNECT_API_KEY_KEY)
 
     echo $FASTLANE_PASSWORD
 
