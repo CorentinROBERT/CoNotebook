@@ -9,7 +9,7 @@ platform :ios do
   desc "Upload to Testflight"
   lane :upload_testflight do
 
-    app_identifier : "com.corentinrobert.notebook"
+    app_identifier = "com.corentinrobert.notebook"
 
     increment_build_number(
       build_number: app_store_build_number(
