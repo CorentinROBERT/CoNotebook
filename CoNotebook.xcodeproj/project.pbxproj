@@ -15,9 +15,22 @@
 		F89EF9E12CBE4D4200716181 /* CoNotebook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoNotebook.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F81D5FA72CE5FC3B00A1E5F7 /* Exceptions for "CoNotebook" folder in "CoNotebook" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F89EF9CE2CBE4D1000716181 /* CoNotebook */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F89EF9D12CBE4D1000716181 /* CoNotebook */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F81D5FA72CE5FC3B00A1E5F7 /* Exceptions for "CoNotebook" folder in "CoNotebook" target */,
+			);
 			path = CoNotebook;
 			sourceTree = "<group>";
 		};
@@ -263,11 +276,14 @@
 				DEVELOPMENT_TEAM = 8UTV7J6Z6Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoNotebook/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CoNotebook;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Faceid to locked and unlocked notes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -293,11 +309,14 @@
 				DEVELOPMENT_TEAM = 8UTV7J6Z6Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoNotebook/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CoNotebook;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Faceid to locked and unlocked notes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

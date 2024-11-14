@@ -35,3 +35,6 @@
 "not_favorites" = "Pas favoris";
 "all_notes" = "Toutes les notes";
 "favorite_note" = "Note favoris";
+"locked_a_note" = "Verrouiller une note";
+"locked"="Verrouillé";
+"use_face_id_to_unlock_note"="Utiliser FaceId pour déverrouiller la note";

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import LocalAuthentication
 
 struct NoteDetailView: View {
     
@@ -19,10 +20,14 @@ struct NoteDetailView: View {
     
     var note : Note
     @State var isAlertPresented = false
-    @State var isModificationMode = false
+    
     @State private var editTitle: String = ""
     @State private var editText: String = ""
     @State private var isLike: Bool = false
+    @State private var isLocked: Bool = false
+    @State private var isScreenLocked: Bool = false
+    @State private var showingAlert: Bool = false
+    
     
     init (note: Note) {
         self.editTitle = note.title ?? ""
@@ -32,125 +37,142 @@ struct NoteDetailView: View {
     
     var body: some View {
         VStack {
-            if(isModificationMode){
-                HStack{
-                    TextField("enter_title".localize(), text: $editTitle)
-                        .font(.title)
-                    ColorPicker("",selection: $color,supportsOpacity: false)
-                        .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
-                        .labelsHidden()
-                    Spacer()
-                    Button("", systemImage: isLike ? "heart.fill" : "heart",action: {
-                        withAnimation {
-                            isLike.toggle()
+            HStack{
+                TextField("enter_title".localize(), text: $editTitle)
+                    .font(.title)
+                Button(action: {
+                    withAnimation {
+                        if(isLocked){
+                            Task{
+                                if(await authenticateWithFaceID()){
+                                    isLocked.toggle()
+                                    note.isLocked = isLocked
+                                }
+                                else{
+                                    dismiss()
+                                }
+                            }
                         }
-                        do {
-                            note.isLike = isLike
-                            try moc.save()
-                        } catch {
-                            print("Error saving note: \(error.localizedDescription)")
+                        else {
+                            isLocked.toggle()
+                            note.isLocked = isLocked
                         }
-                    })
-                    .foregroundStyle(.red)
-                }
-                .padding(.horizontal , 10)
-                TextEditor(text: $editText)
-                    .padding(.leading , 10)
-                    .textEditorStyle(.plain)
-            }
-            else{
-                HStack{
-                    Text(note.title!)
-                        .font(.title)
-                    Circle()
-                        .stroke(Color.black, lineWidth: 1)
-                        .fill(note.getColor())
-                        .frame(width: 30, height: 30)
-                    Spacer()
-                    Button("", systemImage: isLike ? "heart.fill" : "heart",action: {
-                        withAnimation{
-                            isLike.toggle()
-                        }
-                        do {
-                            note.isLike = isLike
-                            try moc.save()
-                        } catch {
-                            print("Error saving note: \(error.localizedDescription)")
-                        }
-                    })
-                    .foregroundStyle(.red)
-                }
-                .frame(maxWidth: .infinity,alignment: .leading)
-                .padding(.horizontal , 10)
-                ScrollView{
-                    Text(note.content!)
-                        .frame(maxWidth: .infinity,alignment: .leading)
-                        .padding(.leading , 15)
-                        .padding(.top , 2)
-                }
-                
-            }
-            
-            Spacer()
-            if(isModificationMode){
-                Button("validate".localize()){
-                    note.title = editTitle
-                    note.content = editText
-                    note.colorR = components?.red ?? 0
-                    note.colorG = components?.green ?? 0
-                    note.colorB = components?.blue ?? 0
-                    note.colorA = components?.opacity ?? 1
-                    note.updateAt = Date()
+                    }
                     do {
                         try moc.save()
                     } catch {
                         print("Error saving note: \(error.localizedDescription)")
                     }
-                    modifyNote()
+                }){
+                    Image(systemName: isLocked ? "lock.fill" : "lock.open.fill")
+                        .font(.title)
                 }
-                .disabled(editTitle.isEmpty || editText.isEmpty)
-            }
-            else{
+                .foregroundStyle(.gray)
+                ColorPicker("",selection: $color,supportsOpacity: false)
+                    .onChange(of: color, initial: true) { components = color.resolve(in: environment) }
+                    .labelsHidden()
+                Spacer()
                 Button(action: {
-                    isAlertPresented.toggle()
-                }) {
-                    Text("delete".localize())
-                        .foregroundStyle(.red)
+                    withAnimation {
+                        isLike.toggle()
+                    }
+                    do {
+                        note.isLike = isLike
+                        try moc.save()
+                    } catch {
+                        print("Error saving note: \(error.localizedDescription)")
+                    }
+                }){
+                    Image(systemName: isLike ? "heart.fill" : "heart")
+                        .font(.title)
                 }
-                .alert(isPresented: $isAlertPresented) {
-                    Alert(
-                        title: Text("sure_delete_this_note".localize()),
-                        message: Text("note_will_delete_permanently".localize()),
-                        primaryButton: .destructive(Text("delete".localize())) {
-                            self.moc.delete(self.note)
-                            self.dismiss()
-                        },
-                        secondaryButton: .cancel()
-                    )
+                .foregroundStyle(.red)
+            }
+            .padding(.horizontal , 10)
+            TextEditor(text: $editText)
+                .textEditorStyle(.plain)
+                .autocorrectionDisabled()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .overlay(RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.secondary).opacity(0.5))
+                .padding()
+            Spacer()
+            Button("validate".localize()){
+                note.title = editTitle
+                note.content = editText
+                note.colorR = components?.red ?? 0
+                note.colorG = components?.green ?? 0
+                note.colorB = components?.blue ?? 0
+                note.colorA = components?.opacity ?? 1
+                note.updateAt = Date()
+                do {
+                    try moc.save()
+                } catch {
+                    print("Error saving note: \(error.localizedDescription)")
                 }
             }
-            
+            .disabled(editTitle.isEmpty || editText.isEmpty)
         }
         .onAppear {
             color = note.getColor()
+            self.isLocked = note.isLocked
             self.isLike = note.isLike
+            self.isScreenLocked = note.isLocked
+            if(note.isLocked){
+                Task {
+                    let authenticated = await authenticateWithFaceID()
+                    if authenticated {
+                        isScreenLocked = false
+                    } else {
+                        dismiss()
+                    }
+                }
+            }
         }
         .toolbar {
-            if(!isModificationMode){
-                Button(action: modifyNote) {
-                    Image(systemName: "square.and.pencil")
-                }
-            }
-            else{
-                Button("cancel".localize()){
-                    modifyNote()
-                }
-            }
+            Button(action: displayDeleteAction) {
+                Image(systemName: "trash")
+                    .foregroundStyle(.red)
+            }.disabled(isScreenLocked)
         }
+        .alert(
+            "delete_note".localize(),
+            isPresented: $showingAlert,
+            presenting: note
+        ) { note in
+            Button("delete".localize(), role: .destructive) {
+                deleteNote()
+                dismiss()
+            }
+            Button("cancel".localize(), role: .cancel) {}
+        } message: { note in
+            Text("sure_delete_note".localize() + " \"\(note.title ?? "this_note".localize())\"?")
+        }
+        .blur(radius: isScreenLocked ? 10 : 0)
     }
     
-    func modifyNote() {
-        self.isModificationMode.toggle()
+    func displayDeleteAction(){
+        showingAlert.toggle()
+    }
+    
+    func deleteNote() {
+        moc.delete(note)
+        try? moc.save()
+    }
+    
+    func authenticateWithFaceID() async -> Bool {
+        let context = LAContext()
+        var error: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            return false
+        }
+        let reason = "use_face_id_to_unlock_note".localize()
+        do {
+            let success = try await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason)
+            return success
+        } catch {
+            return false
+        }
     }
 }
 
@@ -161,6 +183,7 @@ struct NoteDetailView: View {
     let exampleNote = Note(context: context)
     exampleNote.title = "Exemple de note"
     exampleNote.content = "Ceci est le contenu de la note pour la prévisualisation."
+    exampleNote.isLocked = false
     exampleNote.updateAt = Date()
     
     return NoteDetailView(note: exampleNote)
