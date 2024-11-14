@@ -29,13 +29,18 @@ struct AddNewNote: View {
                 Text("add_title_note_here".localize())
                     .fontWeight(.bold)
                 TextField("enter_note_here".localize(), text: $title)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             .padding(.horizontal, 10)
             
             VStack(alignment: .leading) {
                 Text("add_content_note_here".localize())
                     .fontWeight(.bold)
-                TextField("enter_note_content_here".localize(), text: $content)
+                TextEditor(text: $content)
+                    .autocorrectionDisabled()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.secondary).opacity(0.5))
             }
             .padding(.horizontal, 10)
             
