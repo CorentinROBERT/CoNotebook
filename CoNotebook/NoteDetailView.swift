@@ -110,6 +110,7 @@ struct NoteDetailView: View {
                 } catch {
                     print("Error saving note: \(error.localizedDescription)")
                 }
+                dismiss()
             }
             .disabled(editTitle.isEmpty || editText.isEmpty)
         }
