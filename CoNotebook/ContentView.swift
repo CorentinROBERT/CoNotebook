@@ -28,7 +28,7 @@ struct ContentView: View {
             dateFormatter.dateStyle = .medium
             let sortedNotes = notes.sorted(by: { ($0.createdAt ?? Date()) > ($1.createdAt ?? Date()) })
             return Dictionary(grouping: sortedNotes, by: { dateFormatter.string(from: $0.createdAt ?? Date()) })
-
+            
         default:
             // Aucun regroupement
             return ["all_notes".localize(): Array(notes)]
@@ -71,14 +71,15 @@ struct ContentView: View {
                     ForEach(groupedNotes.keys.sorted(by: selectedSorting == "like" ? { $0 < $1 } : { $0 > $1 }), id: \.self) { key in
                         Section(header: Text(key)) {
                             ForEach(groupedNotes[key] ?? []) { note in
-                                NavigationLink(destination: NoteDetailView(note: note)) {
+                                NavigationLink(destination: {
+                                    NoteDetailView(note: note)
+                                } ) {
                                     VStack(alignment: .leading) {
                                         HStack {
                                             Text(note.title ?? "")
                                                 .lineLimit(1)
                                             Spacer()
-                                            Button("", systemImage: note.isLike ? "heart.fill" : "heart",action: {
-                                            }).onTapGesture {
+                                            Button(action: {
                                                 withAnimation {
                                                     note.isLike.toggle()
                                                 }
@@ -88,14 +89,29 @@ struct ContentView: View {
                                                     note.isLike.toggle()
                                                     print("Error saving note: \(error.localizedDescription)")
                                                 }
+                                            }) {
+                                                Image(systemName: note.isLike ? "heart.fill" : "heart")
+                                                    .foregroundColor(.red)
                                             }
-                                            .foregroundStyle(.red)
+                                            .buttonStyle(.plain)
+                                            
+                                            if(note.isLocked){
+                                                Image(systemName: "lock.fill")
+                                                    .foregroundStyle(.secondary)
+                                            }
                                         }
                                         HStack {
-                                            Text(note.content ?? "")
-                                                .font(.caption)
-                                                .lineLimit(1)
-                                                .foregroundStyle(.secondary)
+                                            if note.isLocked {
+                                                Text("locked".localize())
+                                                    .font(.caption)
+                                                    .foregroundStyle(.secondary)
+                                            }
+                                            else{
+                                                Text(note.content ?? "")
+                                                    .font(.caption)
+                                                    .lineLimit(1)
+                                                    .foregroundStyle(.secondary)
+                                            }
                                             Spacer()
                                             Text(note.createdAt?.formatted(.dateTime) ?? "")
                                                 .font(.caption)
@@ -163,6 +179,7 @@ struct ContentView: View {
     let exampleNote = Note(context: context)
     exampleNote.title = "Exemple de note"
     exampleNote.content = "Ceci est le contenu de la note pour la prévisualisation."
+    exampleNote.isLocked = true
     exampleNote.updateAt = Date()
     
     return ContentView()
