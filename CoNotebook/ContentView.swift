@@ -122,8 +122,12 @@ struct ContentView: View {
                 }
             }
             Spacer()
-            NavigationLink("add_new_note".localize()) {
-                AddNewNote()
+            
+            NavigationLink(destination: AddNewNote()){
+                HStack {
+                    Image(systemName: "plus.app.fill")
+                    Text("add_new_note".localize())
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .automatic) {

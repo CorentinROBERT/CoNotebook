@@ -1,0 +1,32 @@
+version: 2.1
+
+jobs:
+  build:
+    macos:
+      xcode: "16.1"
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: xcodebuild -project CoNotebook.xcodeproj -scheme CoNotebook -sdk iphonesimulator clean build
+
+  deploy_to_testflight:
+    macos:
+      xcode: "16.1"
+    steps:
+      - checkout
+      - run:
+          name: Upload to testflight
+          command: fastlane upload_testflight
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy_to_testflight:
+          requires:
+            - build
+          filters:
+            branches:
+              only: release
