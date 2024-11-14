@@ -17,6 +17,7 @@ struct AddNewNote: View {
     @State private var color : Color = .white
     @State private var components: Color.Resolved?
     @State private var isLike: Bool = false
+    @State private var isLocked : Bool = false
     
     @Environment(\.self) var environment
     @Environment(\.dismiss) var dismiss
