@@ -150,6 +150,7 @@ struct NoteDetailView: View {
             Text("sure_delete_note".localize() + " \"\(note.title ?? "this_note".localize())\"?")
         }
         .blur(radius: isScreenLocked ? 10 : 0)
+        .disabled(isScreenLocked)
     }
     
     func displayDeleteAction(){
