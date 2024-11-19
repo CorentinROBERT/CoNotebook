@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import LocalAuthentication
 
 struct AddNewNote: View {
     
@@ -17,6 +18,7 @@ struct AddNewNote: View {
     @State private var color : Color = .white
     @State private var components: Color.Resolved?
     @State private var isLike: Bool = false
+    @State private var isLocked : Bool = false
     
     @Environment(\.self) var environment
     @Environment(\.dismiss) var dismiss
@@ -50,6 +52,15 @@ struct AddNewNote: View {
             Toggle("favorite_note".localize(), isOn: $isLike)
                 .padding(.horizontal, 10)
                 .fontWeight(.bold)
+            Toggle("locked_a_note".localize(),isOn: $isLocked)
+                .padding(.horizontal, 10)
+                .fontWeight(.bold)
+                .onChange(of: isLocked) { newValue in
+                            if newValue {
+                                // Demander Face ID lors de l'activation du toggle
+                                authenticateWithFaceID()
+                            }
+                        }
             Spacer()
             Button("add_note".localize()) {
                 let note = Note(context: moc)
@@ -63,6 +74,7 @@ struct AddNewNote: View {
                 note.colorB = components?.blue ?? 0
                 note.colorA = components?.opacity ?? 1
                 note.isLike = isLike
+                note.isLocked = isLocked
                 do {
                     try moc.save()
                     dismiss()
@@ -78,6 +90,31 @@ struct AddNewNote: View {
             .disabled(title.isEmpty || content.isEmpty)
         }
     }
+    
+    func authenticateWithFaceID() {
+            let context = LAContext()
+            var error: NSError?
+            
+            // Vérifie si Face ID est disponible
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                let reason = "use_face_id_to_unlock_note".localize()
+                
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                    DispatchQueue.main.async {
+                        if success {
+                            // Si l'authentification réussit, le toggle reste activé
+                            isLocked = true
+                        } else {
+                            // Si l'authentification échoue, le toggle se désactive
+                            isLocked = false
+                        }
+                    }
+                }
+            } else {
+                // Si Face ID n'est pas disponible, désactiver le toggle
+                isLocked = false
+            }
+        }
 }
 
 #Preview {

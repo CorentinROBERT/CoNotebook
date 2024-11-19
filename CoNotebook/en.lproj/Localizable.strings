@@ -35,3 +35,6 @@
 "not_favorites"="Not favorites";
 "all_notes" = "All notes";
 "favorite_note"="Favorite note";
+"locked_a_note" = "Locked a note";
+"locked"="Locked";
+"use_face_id_to_unlock_note"="Use FaceId to unlock note";
